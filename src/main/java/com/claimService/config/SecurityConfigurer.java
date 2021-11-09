@@ -110,6 +110,8 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 		   .permitAll()
 		   .antMatchers("/signup")
 		   .permitAll()
+		   .antMatchers("/actuator/**")
+		   .permitAll()
 		   .antMatchers(HttpMethod.OPTIONS)
 		   .permitAll()
 		   .anyRequest()
@@ -126,5 +128,10 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 	 JwtAuthFailureHandler authenticationFailureHandler(){
 	        return new JwtAuthFailureHandler();
 	 }
+	 
+//	 @Bean
+//	 public UserService userDetailsService() {
+//	     return userDetailsService();
+//	 }
 
 }

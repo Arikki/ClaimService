@@ -2,6 +2,8 @@ package com.claimService.controller;
 
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -34,7 +36,7 @@ public class ClaimsServiceController {
 	private ClaimDetailsService claimDetailsSvc;
 
 
-	
+	private Logger logger = LoggerFactory.getLogger(ClaimsServiceController.class);
 	
 	
 	
@@ -42,6 +44,7 @@ public class ClaimsServiceController {
 	@PostMapping("/claims")
 	public ClaimDetails addClaimDetails(@RequestBody ClaimDetails details ) throws InvalidDataException {
 		
+		logger.info("Inside controller to add a claim for user" + details.getEmail());
 		return claimDetailsSvc.addClaimDetails(details);
 	}
 	

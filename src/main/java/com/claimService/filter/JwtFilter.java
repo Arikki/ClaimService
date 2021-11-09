@@ -28,13 +28,7 @@ public class JwtFilter extends OncePerRequestFilter{
 	@Autowired
 	private UserService userSvc;
 
-//	@Override
-//	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-//			throws ServletException, IOException {
-//		// TODO Auto-generated method stub
-//		
-//		filterChain.doFilter(request, response);
-//	}
+
 //Below was causing an issue like not sending the req to controller	
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)

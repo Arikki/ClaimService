@@ -2,8 +2,10 @@ package com.claimService.service;
 
 
 import java.time.LocalDate;
+import java.util.Random;
 
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +19,16 @@ import com.claimService.repository.ClaimDetailsRepository;
 public class ClaimDetailsServiceImpl implements ClaimDetailsService {
 //	private static long id = 1000000000L;	
 
+	private static final long LIMIT = 10000000000L;
+	private static long last = 0;
+	
 	@Autowired
 	private ClaimDetailsRepository repository;
 	
+	private Logger logger = LoggerFactory.getLogger(ClaimDetailsServiceImpl.class);
+	
 	public ClaimDetails addClaimDetails(ClaimDetails request) throws InvalidDataException {
-		
+		logger.info("Inside service to save the claim of user " +  request.getEmail());
 		LocalDate admitDate = LocalDate.parse(request.getAdmissionDate());
 		LocalDate dischrgDate  = LocalDate.parse(request.getDischargeDate());
 		
@@ -34,13 +41,21 @@ public class ClaimDetailsServiceImpl implements ClaimDetailsService {
 		return repository.insert(request);
 	}
 	
-	private long generateClaimNumber() {
-	  long claimNum = 1000000000L;
-	  
+	public  long generateClaimNumber() {
+		
+		
+		long id = System.currentTimeMillis() % LIMIT;
+		
+	
+		if (last == id) {
+			id = System.currentTimeMillis() % LIMIT;
+		}
+		
+		
 	 
 	
 	 
-	return claimNum;
+	return last = id;
 	}
 
 }
